@@ -1,10 +1,10 @@
 package(default_visibility = ["//visibility:public"])
 
-load("@org_pubref_rules_protobuf//cpp:rules.bzl", "cc_proto_library")
+load("@org_pubref_rules_protobuf//go:rules.bzl", "go_proto_library")
 
-cc_proto_library(
+go_proto_library(
     name = "proto",
     protos = [
-        "simple.proto"
+        "simple.proto",
     ],
 )
