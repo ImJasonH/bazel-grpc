@@ -1,4 +1,8 @@
 steps:
+# Build client.
+- name: gcr.io/cloud-builders/bazel
+  args: ['build', '//client:client']
+
 # Build proto.
 - name: gcr.io/cloud-builders/bazel
   args: ['build', '//proto:proto']

@@ -1,14 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "simple_lib",
-    srcs = ["simple.cc"],
-    hdrs = ["simple.h"],
-    deps = ["//proto"],
-)
+load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 
-cc_binary(
+go_binary(
     name = "client",
-    srcs = ["main.cc"],
-    deps = [":simple_lib"],
+    srcs = ["main.go"],
+    deps = ["//proto"],
 )
