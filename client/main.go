@@ -17,6 +17,9 @@ import (
 	"context"
 	"flag"
 	"log"
+
+	pb "github.com/imjasonh/bazel-grpc/proto/proto"
+	"google.golang.org/grpc"
 )
 
 var (

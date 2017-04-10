@@ -1,24 +1,15 @@
 steps:
-# Build client.
-- name: gcr.io/cloud-builders/bazel
-  args: ['build', '//client:client']
-
-# Build proto.
-- name: gcr.io/cloud-builders/bazel
-  args: ['build', '//proto:proto']
-
-# Build server.
-- name: gcr.io/cloud-builders/bazel
-  args: ['build', '//server:server']
-
-# Build Docker image and load into Docker daemon.
-# TODO: Remove above steps.
+# Build server Docker image and load into Docker daemon.
 - name: gcr.io/cloud-builders/bazel
   args: ['run', '//server:image']
 
 # Give the loaded image the name where we want to push it.
 - name: gcr.io/cloud-builders/docker
   args: ['tag', 'bazel/server:image', 'gcr.io/$PROJECT_ID/bazel-grpc']
+
+# Build client.
+#- name: gcr.io/cloud-builders/bazel
+#  args: ['build', '//client:client']
 
 # The resulting images to push to GCR.
 images: ['gcr.io/$PROJECT_ID/bazel-grpc']

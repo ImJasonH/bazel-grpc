@@ -5,7 +5,11 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 go_binary(
     name = "server",
     srcs = ["main.go"],
-    deps = ["//proto"],
+    deps = [
+        "//proto",
+        "@google_golang_org_grpc//:go_default_library",
+        "@google_golang_org_grpc_reflection//:go_default_library",
+    ],
 )
 
 load("@bazel_tools//tools/build_defs/docker:docker.bzl", "docker_build")

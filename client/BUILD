@@ -5,5 +5,8 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 go_binary(
     name = "client",
     srcs = ["main.go"],
-    deps = ["//proto"],
+    deps = [
+        "//proto",
+        "@google_golang_org_grpc//:go_default_library",
+    ],
 )
