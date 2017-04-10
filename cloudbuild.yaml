@@ -13,3 +13,6 @@ steps:
 
 # The resulting images to push to GCR.
 images: ['gcr.io/$PROJECT_ID/bazel-grpc']
+
+# Builds take >10m
+timeout: 15m
