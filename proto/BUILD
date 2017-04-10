@@ -7,4 +7,5 @@ go_proto_library(
     protos = [
         "simple.proto",
     ],
+    with_grpc = True,
 )

@@ -14,25 +14,26 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net"
-	"context"
 
 	pb "github.com/imjasonh/bazel-grpc/proto/proto"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 )
 
+var port = flag.String("port", "50051", "port to listen")
+
 func main() {
-	lis, err := net.Listen("tcp", port)
+	flag.Parse()
+	lis, err := net.Listen("tcp", *port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
-	// Register reflection service on gRPC server.
-	reflection.Register(s)
+	pb.RegisterSimpleServer(s, &server{})
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

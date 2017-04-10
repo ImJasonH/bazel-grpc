@@ -8,8 +8,8 @@ steps:
   args: ['tag', 'bazel/server:image', 'gcr.io/$PROJECT_ID/bazel-grpc']
 
 # Build client.
-#- name: gcr.io/cloud-builders/bazel
-#  args: ['build', '//client:client']
+- name: gcr.io/cloud-builders/bazel
+  args: ['build', '//client:client']
 
 # The resulting images to push to GCR.
 images: ['gcr.io/$PROJECT_ID/bazel-grpc']

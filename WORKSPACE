@@ -10,7 +10,7 @@ git_repository(
     commit = "6fab60252e89cb603afce15d0d0321758895ffd2",
 )
 
-load("@io_bazel_rules_go//go:def.bzl", "go_repositories", "new_go_repository")
+load("@io_bazel_rules_go//go:def.bzl", "go_repositories")
 
 go_repositories()
 
@@ -57,16 +57,4 @@ docker_pull(
     registry = "index.docker.io",
     repository = "library/debian",
     digest = "sha256:d3892ebd85bb21b161e9d170beefd6c444d9bd58aba3998e1f67aa842fbedb9d", # wheezy
-)
-
-# ================================================================
-# external go dependencies
-# ================================================================
-
-new_go_repository(
-    name = "google_golang_org_grpc",
-    importpath = "google.golang.org/grpc",
-    remote = "https://github.com/grpc/grpc-go",
-    tag = "v1.2.1",
-    vcs = "git",
 )
