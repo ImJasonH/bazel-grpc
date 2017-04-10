@@ -32,23 +32,40 @@ load("@org_pubref_rules_protobuf//go:rules.bzl", "go_proto_repositories")
 
 go_proto_repositories()
 
-# ====
-# external dependencies
-# ====
+# ================================================================
+# docker dependencies
+# ================================================================
+
+git_repository(
+    name = "io_bazel_rules_docker",
+    remote = "https://github.com/bazelbuild/rules_docker.git",
+    commit = "06bb5b29088e55a29d09e37e1c88f1cc44aaa806",
+)
+
+load(
+   "@io_bazel_rules_docker//docker:docker.bzl",
+   "docker_pull",
+   "docker_repositories",
+)
+
+# Consumers shouldn't need to do this themselves once WORKSPACE is
+# instantiated recursively.
+docker_repositories()
+
+docker_pull(
+    name = "base_image",
+    registry = "index.docker.io",
+    repository = "library/debian",
+    digest = "sha256:d3892ebd85bb21b161e9d170beefd6c444d9bd58aba3998e1f67aa842fbedb9d", # wheezy
+)
+
+# ================================================================
+# external go dependencies
+# ================================================================
 
 new_go_repository(
     name = "google_golang_org_grpc",
     importpath = "google.golang.org/grpc",
-    remote = "https://github.com/grpc/grpc-go",
-    tag = "v1.2.1",
-    vcs = "git",
-)
-
-# TODO: Do I really need a new_go_repository for each external dependency? I
-# just want to use reflection from the grpc package.
-new_go_repository(
-    name = "google_golang_org_grpc_reflection",
-    importpath = "google.golang.org/grpc/reflection",
     remote = "https://github.com/grpc/grpc-go",
     tag = "v1.2.1",
     vcs = "git",
