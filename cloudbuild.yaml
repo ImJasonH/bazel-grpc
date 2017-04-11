@@ -15,4 +15,4 @@ steps:
 images: ['gcr.io/$PROJECT_ID/bazel-grpc']
 
 # Builds take >10m
-timeout: 15m
+timeout: 900s
